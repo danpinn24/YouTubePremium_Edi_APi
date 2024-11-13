@@ -8,7 +8,7 @@ export class SongsService {
     let song = {
         id: 1,
         title: 'All the Small Things',
-        artist: 'Blink-182',
+        artist: 'Blink',
         album: 'Enema of the State',
         releaseDate: new Date('1999-04-18'),
         genre: 'Pop Punk',
@@ -48,6 +48,18 @@ getSongsByID(id: number) {
             return cancion;
         }
     }
+}
+getSongsByArtist(artist: string) {
+    // Filtramos las canciones que tengan el nombre del artista que se pasa como argumento.
+    const songsByArtist = this.songs.filter(song => song.artist.toLowerCase() === artist.toLowerCase());
+    
+    // Si no hay canciones encontradas, devolvemos un mensaje indicando eso.
+    if (songsByArtist.length === 0) {
+        return `No se encontraron canciones del artista: ${artist}`;
+    }
+    
+    // Devolvemos la lista de canciones encontradas.
+    return songsByArtist;
 }
 
 postSongs(song: SongModel) {

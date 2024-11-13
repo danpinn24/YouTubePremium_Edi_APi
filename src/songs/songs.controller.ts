@@ -21,6 +21,13 @@ export class SongsController {
     return this.service.getSongsByID(id);
   }
 
+  @Get('artist/:artist')
+  getSongsByArtist(@Param('artist') artist: string) {
+      return this.service.getSongsByArtist(artist);
+  }
+
+
+  
   @Put(':id')
   updateSong(@Param('id') id: string, @Body() newSong: SongModel) {
     const songId = parseInt(id, 10); 
