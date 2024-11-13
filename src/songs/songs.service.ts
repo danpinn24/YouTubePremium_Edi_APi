@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { SongModel } from './songs.model';
+import { log } from 'console';
 
 @Injectable()
 export class SongsService { 
@@ -50,17 +51,22 @@ getSongsByID(id: number) {
     }
 }
 getSongsByArtist(artist: string) {
-    // Filtramos las canciones que tengan el nombre del artista que se pasa como argumento.
-    const songsByArtist = this.songs.filter(song => song.artist.toLowerCase() === artist.toLowerCase());
+ const songsByArtist = this.songs.filter(song => song.artist.toLowerCase() === artist.toLowerCase());
     
-    // Si no hay canciones encontradas, devolvemos un mensaje indicando eso.
     if (songsByArtist.length === 0) {
         return `No se encontraron canciones del artista: ${artist}`;
     }
-    
-    // Devolvemos la lista de canciones encontradas.
     return songsByArtist;
 }
+
+getSongsByTitle(title: string) {
+    const songsByTitle = this.songs.filter(song => song.title.toLowerCase() === title.toLowerCase());
+       
+       if (songsByTitle.length === 0) {
+           return `No se encontraron la canciones : ${title}`;
+       }
+       return songsByTitle;
+   }
 
 postSongs(song: SongModel) {
     const newSong = {
